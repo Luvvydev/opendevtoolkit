@@ -1,0 +1,34 @@
+[project]
+name = "opendevtoolkit"
+version = "0.1.0"
+description = "A modular CLI toolkit with plugin-based small utilities."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [
+  { name = "Luvvydev" }
+]
+dependencies = [
+  "typer>=0.12.3",
+  "rich>=13.7.1",
+]
+
+[project.scripts]
+odt = "opendevtoolkit.cli:main"
+
+[project.entry-points."opendevtoolkit.plugins"]
+readme_auditor = "opendevtoolkit.plugins.readme_auditor:plugin_factory"
+time_tracker = "opendevtoolkit.plugins.time_tracker:plugin_factory"
+
+[build-system]
+requires = ["hatchling>=1.24.2"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/opendevtoolkit"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
