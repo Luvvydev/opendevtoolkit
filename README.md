@@ -7,15 +7,14 @@
   <img src="assets/odt-plugins.png" width="800" />
 </p>
 
-A modular, project-agnostic command-line toolkit that bundles small developer utilities under a single CLI using a plugin-based architecture.
+OpenDevToolkit is a small command line tool that groups a few practical developer utilities under one executable.  
+It is meant for personal use, small projects, and simple automation, not for replacing full platforms or services.
 
-OpenDevToolkit is local-first and explicit by design. It does not require accounts, configuration files, or external services. Tools operate only on what the user directly points them at.
-
----
+Everything runs locally. Nothing is auto-detected, synced, or uploaded anywhere.
 
 ## Install
 
-Local development install:
+This is a local install meant for development or personal use.
 
 ```bash
 python -m venv .venv
@@ -24,18 +23,16 @@ pip install -U pip
 pip install -e .
 ```
 
-Verify installation:
+After installing, confirm it is working:
 
 ```bash
 odt --help
 odt plugins
 ```
 
----
-
 ## Usage
 
-General commands:
+The main command is `odt`. Each tool is exposed as a subcommand.
 
 ```bash
 odt --help
@@ -44,19 +41,18 @@ odt plugins
 
 ### README auditor
 
-Checks a README file for common presentation gaps that reduce adoption.
+This tool checks a README file for common issues that make repositories harder to understand or adopt.
 
 ```bash
 odt readme check README.md
 ```
 
-The command exits with a non-zero status if checks fail, making it suitable for CI.
-
----
+It looks for things like a title, install steps, usage examples, and license mentions.  
+If checks fail, the command exits with a non-zero status so it can be used in CI.
 
 ### Time tracker
 
-Lightweight, local-only time tracking stored in JSON.
+This is a very simple time tracker that stores data locally in JSON.
 
 ```bash
 odt time start "my-project"
@@ -66,63 +62,50 @@ odt time report --days 7
 odt time export --out time.json
 ```
 
-No accounts. No sync. No cloud storage.
-
----
+There is no account system and no syncing. Project names are just strings.
 
 ## Data storage
 
-By default, OpenDevToolkit stores state in a per-user data directory.
+By default, state is written to a per-user data directory on the machine.
 
-You can override it explicitly:
+If you want to control where data is stored, you can override it:
 
 ```bash
 odt --data-dir ./_odt_data time status
 ```
 
----
+## Plugins
 
-## Plugin system
+Tools are implemented as plugins discovered through Python entry points.  
+Each plugin registers its own subcommands and does not depend on other plugins.
 
-OpenDevToolkit discovers plugins via Python entry points.
-
-Each plugin:
-- Declares metadata (name, version, description)
-- Registers its own subcommands
-- Runs independently of other plugins
-
-See `docs/PLUGIN_SPEC.md` for the minimal plugin interface.
-
----
+The interface is intentionally small. See `docs/PLUGIN_SPEC.md` for details.
 
 ## Development
 
-Run tests locally:
+Tests can be run locally with:
 
 ```bash
 pip install pytest
 pytest
 ```
 
-CI runs tests automatically on push and pull requests.
+A GitHub Actions workflow runs the same tests on push and pull requests.
 
----
+## Scope
 
-## What this tool is
+This project is intentionally limited in scope.
 
-- A single CLI that replaces scattered scripts
-- A container for small, focused developer utilities
-- Local-first and explicit
-- Extensible without modifying the core
+It is meant to:
+- replace scattered one-off scripts
+- provide a single CLI entry point
+- stay understandable without documentation sprawl
 
-## What this tool is not
-
-- Not a framework
-- Not a SaaS
-- Not tied to any specific GitHub repository
-- Not opinionated about workflow
-
----
+It is not meant to be:
+- a framework
+- a hosted service
+- a workflow engine
+- opinionated about how you work
 
 ## License
 
