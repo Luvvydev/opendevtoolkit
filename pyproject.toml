@@ -19,6 +19,10 @@ odt = "opendevtoolkit.cli:main"
 [project.entry-points."opendevtoolkit.plugins"]
 readme_auditor = "opendevtoolkit.plugins.readme_auditor:plugin_factory"
 time_tracker = "opendevtoolkit.plugins.time_tracker:plugin_factory"
+repo_check = "opendevtoolkit.plugins.repo_check:plugin_factory"
+files_clean = "opendevtoolkit.plugins.files_clean:plugin_factory"
+notes = "opendevtoolkit.plugins.notes:plugin_factory"
+
 
 [build-system]
 requires = ["hatchling>=1.24.2"]
