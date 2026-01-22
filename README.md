@@ -11,14 +11,15 @@
   <img src="assets/odt-plugins.png" width="800" />
 </p>
 
-OpenDevToolkit is a small command line tool that groups a few practical developer utilities under one executable.  
-It is meant for personal use, small projects, and simple automation, not for replacing full platforms or services.
+OpenDevToolkit is a small command line tool that groups a handful of practical developer utilities under one executable.
+
+It is designed for personal use, small projects, and simple automation. It is not intended to replace full platforms, hosted services, or complex workflow tools.
 
 Everything runs locally. Nothing is auto-detected, synced, or uploaded anywhere.
 
 ## Install
 
-This is a local install meant for development or personal use.
+This is a local install intended for development or personal use.
 
 ```bash
 python -m venv .venv
@@ -45,18 +46,18 @@ odt plugins
 
 ### README auditor
 
-This tool checks a README file for common issues that make repositories harder to understand or adopt.
+Checks a README file for common issues that make repositories harder to understand or adopt.
 
 ```bash
 odt readme check README.md
 ```
 
-It looks for things like a title, install steps, usage examples, and license mentions.  
+It looks for things like a title, install steps, usage examples, screenshots, and license mentions.  
 If checks fail, the command exits with a non-zero status so it can be used in CI.
 
 ### Time tracker
 
-This is a very simple time tracker that stores data locally in JSON.
+A very simple time tracker that stores data locally in JSON.
 
 ```bash
 odt time start "my-project"
@@ -68,22 +69,56 @@ odt time export --out time.json
 
 There is no account system and no syncing. Project names are just strings.
 
+### Repo check
+
+Performs basic repository hygiene checks.
+
+```bash
+odt repo check .
+```
+
+This checks for things like the presence of a README, license, gitignore, source directory, and common junk files.  
+It reports warnings only and does not modify anything.
+
+### Files clean
+
+Lists common junk files and directories, with a dry run by default.
+
+```bash
+odt files clean
+odt files clean --apply
+```
+
+Nothing is deleted unless `--apply` is explicitly provided.
+
+### Notes
+
+A minimal local notes tool that stores plain text notes.
+
+```bash
+odt notes add "fix README wording"
+odt notes list
+```
+
+Notes are stored locally and are not associated with any repository unless you choose to use them that way.
+
 ## Data storage
 
-By default, state is written to a per-user data directory on the machine.
+By default, OpenDevToolkit stores state in a per-user data directory on the machine.
 
-If you want to control where data is stored, you can override it:
+If you want to control where data is written, you can override it:
 
 ```bash
 odt --data-dir ./_odt_data time status
 ```
 
-## Plugins
+## Plugin system
 
-Tools are implemented as plugins discovered through Python entry points.  
-Each plugin registers its own subcommands and does not depend on other plugins.
+Tools are implemented as plugins discovered through Python entry points.
 
-The interface is intentionally small. See `docs/PLUGIN_SPEC.md` for details.
+Each plugin registers its own subcommands and does not depend on other plugins. The interface is intentionally small and stable.
+
+See `docs/PLUGIN_SPEC.md` for details.
 
 ## Development
 
@@ -105,11 +140,10 @@ It is meant to:
 - provide a single CLI entry point
 - stay understandable without documentation sprawl
 
-It is not meant to be:
-- a framework
-- a hosted service
-- a workflow engine
-- opinionated about how you work
+It is not meant to:
+- be a framework
+- be a hosted service
+- dictate how you work
 
 ## License
 
