@@ -4,6 +4,10 @@
 ![License](https://img.shields.io/badge/license-MIT-green.svg)
 
 <p align="center">
+  <img src="assets/opendevtoolkiticon.png" width="160" alt="OpenDevToolkit icon" />
+</p>
+
+<p align="center">
   <img src="assets/odt-plugins.png" width="800" />
 </p>
 
